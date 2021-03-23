@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CarbonProject.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,9 @@ namespace CarbonProject.Data
             : base(options)
         {
         }
+
+        public DbSet<Environmentalist> Environmentalists { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<CarbonFootprint> CarbonFootprints { get; set; }
     }
 }
