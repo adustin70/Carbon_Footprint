@@ -351,3 +351,6 @@ MigrationBackup/
 
 # Migrations to SQL database
 Migrations/
+
+#ApiKeys
+/ApiKeys.cs
