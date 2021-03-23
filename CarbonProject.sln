@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarbonProject", "CarbonProject\CarbonProject.csproj", "{B7CFABC9-62DA-4BE5-9E00-EA20CB93DC4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7CFABC9-62DA-4BE5-9E00-EA20CB93DC4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7CFABC9-62DA-4BE5-9E00-EA20CB93DC4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7CFABC9-62DA-4BE5-9E00-EA20CB93DC4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7CFABC9-62DA-4BE5-9E00-EA20CB93DC4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C10D074-D2D1-47D1-A10C-09D95048F10E}
+	EndGlobalSection
+EndGlobal
