@@ -15,7 +15,7 @@ namespace CarbonProject.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.11")
+                .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -41,7 +41,12 @@ namespace CarbonProject.Migrations
                     b.Property<int>("PowerUsedData")
                         .HasColumnType("int");
 
+                    b.Property<int>("SurveyId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SurveyId");
 
                     b.ToTable("CarbonFootprints");
                 });
@@ -305,6 +310,15 @@ namespace CarbonProject.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("CarbonProject.Models.CarbonFootprint", b =>
+                {
+                    b.HasOne("CarbonProject.Models.Survey", "Survey")
+                        .WithMany()
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CarbonProject.Models.Environmentalist", b =>

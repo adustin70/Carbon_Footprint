@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,5 +16,9 @@ namespace CarbonProject.Models
         public int PlasticBagsUsedData { get; set; }
         public int PlasticBottlesUsedData { get; set; }
         public int PowerUsedData { get; set; }
+
+        [ForeignKey("Survey")]
+        public int SurveyId { get; set; }
+        public Survey Survey { get; set; }
     }
 }
