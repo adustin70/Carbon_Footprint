@@ -354,3 +354,6 @@ Migrations/
 
 #ApiKeys
 ApiKeys.cs
+
+#File containing api key
+heatMap.js

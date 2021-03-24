@@ -28,4 +28,8 @@
     <Folder Include="Views\Environmentalist\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\heatMap.js" />
+  </ItemGroup>
+
 </Project>
