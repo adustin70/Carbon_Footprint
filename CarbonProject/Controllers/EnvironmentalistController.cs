@@ -1,6 +1,7 @@
 ﻿using CarbonProject.Data;
 using CarbonProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,21 @@ namespace CarbonProject.Controllers
             _context.Add(user);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CarbonData(int? id)
+        {
+            var survey = _context.Surveys.Where(s => s.Id == id).FirstOrDefault();
+            _context.Add(survey);
+            _context.SaveChanges();
+            return Ok();
+        }
+
+        public void SerializeCarbonData(CarbonFootprint footprint)
+        {
+            string json = JsonConvert.SerializeObject(footprint);
         }
     }
 }
