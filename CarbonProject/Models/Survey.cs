@@ -10,7 +10,7 @@ namespace CarbonProject.Models
     public class Survey
     {
         [Key]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int MilesDriven { get; set; }
         public string FuelType { get; set; }
         public int PlasticBagsUsed { get; set; }
@@ -18,7 +18,7 @@ namespace CarbonProject.Models
         public int PowerUsed { get; set; }
 
         [ForeignKey("Environmentalist")]
-        public int EnvironmentalistId { get; set; }
+        public int? EnvironmentalistId { get; set; }
         public Environmentalist Environmentalist { get; set; }
     }
 }

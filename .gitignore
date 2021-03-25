@@ -350,7 +350,7 @@ MigrationBackup/
 .ionide/
 
 # Migrations to SQL database
-Data/Migrations
+Migrations
 
 #ApiKeys
 ApiKeys.cs

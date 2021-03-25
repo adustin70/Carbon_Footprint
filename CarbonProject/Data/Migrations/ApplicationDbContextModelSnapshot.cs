@@ -21,7 +21,7 @@ namespace CarbonProject.Migrations
 
             modelBuilder.Entity("CarbonProject.Models.CarbonFootprint", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -41,7 +41,7 @@ namespace CarbonProject.Migrations
                     b.Property<int>("PowerUsedData")
                         .HasColumnType("int");
 
-                    b.Property<int>("SurveyId")
+                    b.Property<int?>("SurveyId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -53,7 +53,7 @@ namespace CarbonProject.Migrations
 
             modelBuilder.Entity("CarbonProject.Models.Environmentalist", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -82,12 +82,12 @@ namespace CarbonProject.Migrations
 
             modelBuilder.Entity("CarbonProject.Models.Survey", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EnvironmentalistId")
+                    b.Property<int?>("EnvironmentalistId")
                         .HasColumnType("int");
 
                     b.Property<string>("FuelType")
@@ -141,8 +141,8 @@ namespace CarbonProject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e7a05b93-9b9d-43d1-86c5-416c58754e76",
-                            ConcurrencyStamp = "c2875e60-e002-40c7-a916-9adc28e29d51",
+                            Id = "db9c3ff9-f68b-456b-9500-568ad55adf93",
+                            ConcurrencyStamp = "18486ebf-9f0a-4eb4-b3bc-4512807ed393",
                             Name = "Environmentalist",
                             NormalizedName = "ENVIRONMENTALIST"
                         });
@@ -321,9 +321,7 @@ namespace CarbonProject.Migrations
                 {
                     b.HasOne("CarbonProject.Models.Survey", "Survey")
                         .WithMany()
-                        .HasForeignKey("SurveyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SurveyId");
                 });
 
             modelBuilder.Entity("CarbonProject.Models.Environmentalist", b =>
@@ -337,9 +335,7 @@ namespace CarbonProject.Migrations
                 {
                     b.HasOne("CarbonProject.Models.Environmentalist", "Environmentalist")
                         .WithMany()
-                        .HasForeignKey("EnvironmentalistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EnvironmentalistId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
