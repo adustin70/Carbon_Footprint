@@ -72,30 +72,23 @@ namespace CarbonProject.Controllers
                 survey.EnvironmentalistId = user.Id;                
                 _context.Add(survey);
                 _context.SaveChanges();
-                CarbonData(survey);
+                CarbonData(survey, survey.FuelType);
                 return RedirectToAction(nameof(Index));
             }
             return View(survey);
         }
 
-        public IActionResult CarbonData(Survey survey)
+        public void CarbonData(Survey survey, string fuelType)
         {
-            var footprint = _context.CarbonFootprints.Where(c => c.SurveyId == survey.Id).FirstOrDefault();
+            var footprint = _context.CarbonFootprints.Where(f => f.FuelTypeData == fuelType).FirstOrDefault();
 
-            if (footprint == null)
-            {
-                footprint.SurveyId = survey.Id;
-                _context.Add(survey);
-                _context.SaveChanges();
-                return Ok();
-            }
-            else if (footprint.SurveyId == survey.Id)
-            {
-                _context.Update(survey);
-                _context.SaveChanges();
-                return Ok();
-            }
-            return RedirectToAction(nameof(Survey));
+            footprint.MilesDrivenData = survey.MilesDriven;
+            footprint.PlasticBagsUsedData = survey.PlasticBagsUsed;
+            footprint.PlasticBottlesUsedData = survey.PlasticBottlesUsed;
+            footprint.PowerUsedData = survey.PowerUsed;
+
+            _context.Update(footprint);
+            _context.SaveChanges();
         }
 
         public IActionResult SerializeCarbonData(CarbonFootprint footprint)

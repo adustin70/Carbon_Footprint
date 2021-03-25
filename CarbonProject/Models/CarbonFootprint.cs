@@ -16,9 +16,5 @@ namespace CarbonProject.Models
         public int PlasticBagsUsedData { get; set; }
         public int PlasticBottlesUsedData { get; set; }
         public int PowerUsedData { get; set; }
-
-        [ForeignKey("Survey")]
-        public int? SurveyId { get; set; }
-        public Survey Survey { get; set; }
     }
 }
