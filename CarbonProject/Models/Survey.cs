@@ -11,11 +11,11 @@ namespace CarbonProject.Models
     {
         [Key]
         public int? Id { get; set; }
-        public int MilesDriven { get; set; }
+        public double MilesDriven { get; set; }
         public string FuelType { get; set; }
-        public int PlasticBagsUsed { get; set; }
-        public int PlasticBottlesUsed { get; set; }
-        public int PowerUsed { get; set; }
+        public double PlasticBagsUsed { get; set; }
+        public double PlasticBottlesUsed { get; set; }
+        public double PowerUsed { get; set; }
 
         [ForeignKey("Environmentalist")]
         public int? EnvironmentalistId { get; set; }

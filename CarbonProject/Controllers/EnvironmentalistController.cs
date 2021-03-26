@@ -101,7 +101,7 @@ namespace CarbonProject.Controllers
                 survey.EnvironmentalistId = user.Id;                
                 _context.Add(survey);
                 await _context.SaveChangesAsync();
-                CarbonData(survey, survey.FuelType);
+                await CarbonData(survey, survey.FuelType);
                 return RedirectToAction(nameof(Index));
             }
             return View(survey);
