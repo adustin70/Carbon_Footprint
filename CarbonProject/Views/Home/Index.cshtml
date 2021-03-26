@@ -1,65 +1,36 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<body>
+    <div class="text-center">
+        <h1 class="display-3">Carbon Footprint?</h1>
+        <p>How can carbon have a footprint if it doesn't have feet?</p>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Carbon Footprint?</h1>
-    <p>How can carbon have a footprint if it doesn't have feet?</p>
-</div>
+    <div class="card" style="width:20rem; text-align:center; float:left; margin-left:-350px">
+        <div class="card-body">
+            <strong>What is a carbon footprint?</strong><br />
+            A carbon footprint is the total amount of greenhouse gas emissions that anything – a person, organization,
+            event or product – has produced. Greenhouse gases are the gases in the atmosphere that produce the “greenhouse effect”
+            and contribute to global warming and climate change.<br />
 
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
-<script src="https://unpkg.com/deck.gl@7.3/dist.min.js"></script>
+            So your carbon footprint is a way to measure the environmental impact your lifestyle has.
+            For example, if you drive to work every day your carbon footprint might be bigger than someone who relies on public transport
+            because you’re emitting more greenhouse gas.<br />
 
-<div id="container" style="height: 500px;"></div>
+            <br /><p>
+                <strong>
+                    Read more about CNN's article on carbon emissions
+                    <a href="https://www.cnn.com/2019/09/08/us/carbon-footprint-facts-trnd" style="text-decoration:underline">here</a>
+                </strong>
+            </p>
+        </div>
+    </div>
 
-@*<script type="text/javascript" src="~/js/heatMap.js"></script>*@
-@*Don't forget to uncomment this ^^ needed for awesome map*@
-
-<div class="chart-container" style="position: relative">
-    <canvas id="average" width="300" height="150" aria-label="Carbon" role="img"></canvas>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.2/dist/Chart.min.js"></script>
-
-<script>
-    const api_url = 'https://api.v2.emissions-api.org'+ '/api/v2/carbonmonoxide/average.json'
-        + '?country=US&begin=2021-02-01&end=2021-03-01'
-
-    window.onload = function () {
-        fetch(api_url)
-            .then(response => response.json())
-            .then(data => {
-                let ctx = document.getElementById('average').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: data.map(x => x.start.substring(8, 10)).sort(),
-                        datasets: [{
-                            label: 'America',
-                            backgroundColor: '#93bd20',
-                            data: data.map(x => x.average),
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                scaleLabel: {
-                                    display: true,
-                                    labelString: 'carbon monoxide [mol/m²]'
-                                },
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }],
-                            xAxes: [{
-                                scaleLabel: {
-                                    display: true,
-                                    labelString: 'day'
-                                }
-                            }]
-                        }
-                    }
-                });
-            })
-    }
-</script>
+    <div id="container" style="height: 500px;"></div>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://unpkg.com/deck.gl@7.3/dist.min.js"></script>
+    <script type="text/javascript" src="~/js/heatMap.js"></script>
+    <p>The map shows Carbon emission levels the darker colors are higher and the lighter ones are lower.</p>  
+</body>
