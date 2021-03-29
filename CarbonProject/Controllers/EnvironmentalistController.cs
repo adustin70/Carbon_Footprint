@@ -106,7 +106,7 @@ namespace CarbonProject.Controllers
 
                 _context.Add(survey);
                 await _context.SaveChangesAsync();
-                await CarbonData(survey, survey.FuelType);
+                await CarbonData(survey);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -146,28 +146,31 @@ namespace CarbonProject.Controllers
             return View(survey);
         }
 
-        public async Task<IActionResult> CarbonData(Survey survey, string fuelType)
+        public async Task<IActionResult> CarbonData(Survey survey)
         {
-            var data = _context.CarbonFootprints.Where(f => f.FuelType == fuelType).FirstOrDefault();
+            var data = new CarbonFootprint();
 
-            data.EnvironmentalistId = survey.EnvironmentalistId;
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _context.Environmentalists.Where(e => e.IdentityUserId == userId).FirstOrDefault();
+
+            data.EnvironmentalistId = user.Id;
 
             if (survey.FuelType == "Gasoline")
             {
                 data.FuelType = survey.FuelType;
-                data.FuelEmissions = survey.MilesDriven * 8.89;
+                data.FuelEmissions = Math.Round(survey.MilesDriven * 8.89);
             }
             else if (survey.FuelType == "Diesel")
             {
                 data.FuelType = survey.FuelType;
-                data.FuelEmissions = survey.MilesDriven * 10.16;
+                data.FuelEmissions = Math.Round(survey.MilesDriven * 10.16);
             }
 
-            data.PlasticBagsEmissions = survey.PlasticBagsUsed * 33;
-            data.PlasticBottlesEmissions = survey.PlasticBottlesUsed * 3;
-            data.PowerUsedEmissions = survey.PowerUsed * 1.85;
+            data.PlasticBagsEmissions = Math.Round(survey.PlasticBagsUsed * 33);
+            data.PlasticBottlesEmissions = Math.Round(survey.PlasticBottlesUsed * 3);
+            data.PowerUsedEmissions = Math.Round(survey.PowerUsed * 1.85);
 
-            _context.Add(data);
+            _context.CarbonFootprints.Add(data);
             await _context.SaveChangesAsync();
 
             return Ok();

@@ -27,12 +27,6 @@ namespace CarbonProject.Data
                     NormalizedName = "ENVIRONMENTALIST"
                 }
             );
-
-            builder.Entity<CarbonFootprint>()
-                .HasData(
-                new CarbonFootprint { Id = 1, FuelEmissions = 0, FuelType = "Gasoline", PlasticBagsEmissions = 0, PlasticBottlesEmissions = 0, PowerUsedEmissions = 0 },
-                new CarbonFootprint { Id = 2, FuelEmissions = 0, FuelType = "Diesel", PlasticBagsEmissions = 0, PlasticBottlesEmissions = 0, PowerUsedEmissions = 0 }
-                );
         }
 
         public DbSet<Environmentalist> Environmentalists { get; set; }
