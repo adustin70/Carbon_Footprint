@@ -39,5 +39,6 @@ namespace CarbonProject.Data
         public DbSet<Environmentalist> Environmentalists { get; set; }
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<CarbonFootprint> CarbonFootprints { get; set; }
+        public DbSet<SurveyCarbonData> SurveyCarbonDatas { get; set; }
     }
 }

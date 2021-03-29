@@ -50,8 +50,10 @@ namespace CarbonProject.Controllers
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 environmentalist.IdentityUserId = userId;
+
                 _context.Add(environmentalist);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Survey));
             }
             return View(environmentalist);
@@ -61,6 +63,7 @@ namespace CarbonProject.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _context.Environmentalists.Where(e => e.IdentityUserId == userId).FirstOrDefault();
+
             return View(user);
         }
 
@@ -80,6 +83,7 @@ namespace CarbonProject.Controllers
 
                 _context.Entry(user).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(environmentalist);
@@ -98,10 +102,12 @@ namespace CarbonProject.Controllers
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var user = _context.Environmentalists.Where(e => e.IdentityUserId == userId).FirstOrDefault();
-                survey.EnvironmentalistId = user.Id;                
+                survey.EnvironmentalistId = user.Id;
+
                 _context.Add(survey);
                 await _context.SaveChangesAsync();
                 await CarbonData(survey, survey.FuelType);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(survey);
@@ -112,12 +118,13 @@ namespace CarbonProject.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _context.Environmentalists.Where(e => e.IdentityUserId == userId).FirstOrDefault();
             var survey = _context.Surveys.Where(s => s.EnvironmentalistId == user.Id).FirstOrDefault();
+
             return View(survey);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditSurvey(Survey survey)
+        public async Task<IActionResult> EditSurvey([Bind("Id, MilesDriven, FuelType, PlasticBagsUsed, PlasticBottlesUsed, PowerUsed, EnvironmentalistId")] Survey survey)
         {
             if (ModelState.IsValid)
             {
@@ -133,6 +140,7 @@ namespace CarbonProject.Controllers
 
                 _context.Entry(chosenSurvey).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(survey);
@@ -149,13 +157,39 @@ namespace CarbonProject.Controllers
 
             _context.Update(footprint);
             await _context.SaveChangesAsync();
+
             return Ok();
         }
 
-        public IActionResult SerializeCarbonData(CarbonFootprint footprint)
+        public async Task<IActionResult> SurveyData(Survey survey)
         {
-            string json = JsonConvert.SerializeObject(footprint);
-            return Ok(json);
+            if (ModelState.IsValid)
+            {
+                var data = _context.SurveyCarbonDatas.Where(s => s.EnvironmentalistId == survey.EnvironmentalistId).FirstOrDefault();
+
+                data.EnvironmentalistId = survey.EnvironmentalistId;
+
+                if (survey.FuelType == "Gasoline")
+                {
+                    data.FuelType = survey.FuelType;
+                    data.FuelEmissions = survey.MilesDriven * 8.89;
+                }
+                else if (survey.FuelType == "Diesel")
+                {
+                    data.FuelType = survey.FuelType;
+                    data.FuelEmissions = survey.MilesDriven * 10.16;
+                }
+
+                data.PlasticBagsEmissions = survey.PlasticBagsUsed * 33;
+                data.PlasticBottlesEmissions = survey.PlasticBottlesUsed * 3;
+                data.PowerUsedEmissions = survey.PowerUsed * 1.85;
+
+                _context.Add(data);
+                await _context.SaveChangesAsync();
+
+                return Ok();
+            }
+            return NotFound();
         }
     }
 }
