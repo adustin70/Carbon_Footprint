@@ -6,34 +6,35 @@
 }
 
 <h1>Your Carbon Footprint Survey</h1>
-@*Need to add comments and descriptions*@
+
+<h3>All answers should be on a per month basis.</h3>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Survey">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="MilesDriven" class="control-label"></label>
+                <label asp-for="MilesDriven" class="control-label">Miles Driven</label>
                 <input asp-for="MilesDriven" class="form-control" />
                 <span asp-validation-for="MilesDriven" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FuelType" class="control-label"></label>
+                <label asp-for="FuelType" class="control-label">Gasoline or Diesel</label>
                 <input asp-for="FuelType" class="form-control" />
                 <span asp-validation-for="FuelType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PlasticBagsUsed" class="control-label"></label>
+                <label asp-for="PlasticBagsUsed" class="control-label">Plastic Grocery Bags</label>
                 <input asp-for="PlasticBagsUsed" class="form-control" />
                 <span asp-validation-for="PlasticBagsUsed" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PlasticBottlesUsed" class="control-label"></label>
+                <label asp-for="PlasticBottlesUsed" class="control-label"> Plastic Water bottles</label>
                 <input asp-for="PlasticBottlesUsed" class="form-control" />
                 <span asp-validation-for="PlasticBottlesUsed" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PowerUsed" class="control-label"></label>
+                <label asp-for="PowerUsed" class="control-label">How much power used</label>
                 <input asp-for="PowerUsed" class="form-control" />
                 <span asp-validation-for="PowerUsed" class="text-danger"></span>
             </div>

@@ -148,48 +148,29 @@ namespace CarbonProject.Controllers
 
         public async Task<IActionResult> CarbonData(Survey survey, string fuelType)
         {
-            var footprint = _context.CarbonFootprints.Where(f => f.FuelTypeData == fuelType).FirstOrDefault();
+            var data = _context.CarbonFootprints.Where(f => f.FuelType == fuelType).FirstOrDefault();
 
-            footprint.MilesDrivenData = survey.MilesDriven;
-            footprint.PlasticBagsUsedData = survey.PlasticBagsUsed;
-            footprint.PlasticBottlesUsedData = survey.PlasticBottlesUsed;
-            footprint.PowerUsedData = survey.PowerUsed;
+            data.EnvironmentalistId = survey.EnvironmentalistId;
 
-            _context.Update(footprint);
+            if (survey.FuelType == "Gasoline")
+            {
+                data.FuelType = survey.FuelType;
+                data.FuelEmissions = survey.MilesDriven * 8.89;
+            }
+            else if (survey.FuelType == "Diesel")
+            {
+                data.FuelType = survey.FuelType;
+                data.FuelEmissions = survey.MilesDriven * 10.16;
+            }
+
+            data.PlasticBagsEmissions = survey.PlasticBagsUsed * 33;
+            data.PlasticBottlesEmissions = survey.PlasticBottlesUsed * 3;
+            data.PowerUsedEmissions = survey.PowerUsed * 1.85;
+
+            _context.Add(data);
             await _context.SaveChangesAsync();
 
             return Ok();
-        }
-
-        public async Task<IActionResult> SurveyData(Survey survey)
-        {
-            if (ModelState.IsValid)
-            {
-                var data = _context.SurveyCarbonDatas.Where(s => s.EnvironmentalistId == survey.EnvironmentalistId).FirstOrDefault();
-
-                data.EnvironmentalistId = survey.EnvironmentalistId;
-
-                if (survey.FuelType == "Gasoline")
-                {
-                    data.FuelType = survey.FuelType;
-                    data.FuelEmissions = survey.MilesDriven * 8.89;
-                }
-                else if (survey.FuelType == "Diesel")
-                {
-                    data.FuelType = survey.FuelType;
-                    data.FuelEmissions = survey.MilesDriven * 10.16;
-                }
-
-                data.PlasticBagsEmissions = survey.PlasticBagsUsed * 33;
-                data.PlasticBottlesEmissions = survey.PlasticBottlesUsed * 3;
-                data.PowerUsedEmissions = survey.PowerUsed * 1.85;
-
-                _context.Add(data);
-                await _context.SaveChangesAsync();
-
-                return Ok();
-            }
-            return NotFound();
         }
     }
 }
