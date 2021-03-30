@@ -33,7 +33,10 @@ namespace CarbonProject.Controllers
             }
             else
             {
-                return View();
+                var carbonData = _context.CarbonFootprints.Where(c => c.EnvironmentalistId == user.Id).FirstOrDefault();
+                
+
+                return View(carbonData);
             }
         }
 
@@ -174,6 +177,12 @@ namespace CarbonProject.Controllers
             await _context.SaveChangesAsync();
 
             return Ok();
+        }
+
+        public JsonResult SerializeCarbonData(CarbonFootprint footprint)
+        {
+            string json = JsonConvert.SerializeObject(footprint);
+            return Json(json);
         }
     }
 }
