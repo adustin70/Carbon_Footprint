@@ -90,7 +90,8 @@
         ]);
 
         var options = {
-            title: 'My Monthly Carbon Footprint'
+            title: 'My Monthly Carbon Footprint',
+            is3D: true
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -129,6 +130,7 @@
         var options = {
             title: 'Carbon Footprint',
             curveType: 'function',
+            lineWidth: 10,
             legend: { position: 'bottom' }
         };
 
