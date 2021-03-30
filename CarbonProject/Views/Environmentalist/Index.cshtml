@@ -14,8 +14,68 @@
     <a asp-action="EditSurvey">Update Survey Answers</a>
 </div>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
+<div class="container" style="margin-left:-300px; position:static; width:600px">
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+            <img src="~/images/air-pollution.png" class="card-img-top" alt="air-pollution">
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text">
+                    You may be asking yourself "How can I lower my carbon footprint?".
+                    Well there are several ways to go about this. On this page you will find helpful tips
+                    as well as links to learn more about what you can do to lower your carbon footprint.
+                    Below is a link to a blog by Columbia University.
+                </p>
+                <a href="https://blogs.ei.columbia.edu/2018/12/27/35-ways-reduce-carbon-footprint/" class="btn btn-primary">Earth Institute</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="~/images/Rubbish-dump.jpg" class="card-img-top" alt="Land-Fill">
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text">
+                    One way to lower your carbon footprint is to have your own reusable grocery bag.
+                    Studies show that not only do plastic bags attribute to around 3.3 million tons of garbage
+                    they also produce about 33 grams of carbon per bag. You can read more about the impact plastic
+                    bags have on the environment by clicking the link below.
+                </p>
+                <a href="https://www.biologicaldiversity.org/programs/population_and_sustainability/sustainability/plastic_bag_facts.html"
+                   class="btn btn-primary">Biological Diversity</a>
+            </div>
+        </div>
+            <div class="card" style="width: 18rem;">
+                <img src="~/images/plastic-bottles.png" class="card-img-top" alt="Plastic-Bottles">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">
+                        Instead of buying plastic water bottles you can get a reusable bottle and
+                        a water filter. Though water filters also contribute to carbon emissions
+                        they are significantly lower. Plastic bottles also make up around 268 million
+                        tons of garbage. To learn more about the impact plastic bottles have on the environment
+                        visit the link below.
+                    </p>
+                    <a href="https://sciencing.com/carbon-footprint-plastic-bottle-12307187.html" class="btn btn-primary">Sciencing</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="~/images/carbon.jpg" class="card-img-top" alt="carbon">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">
+                        The average home produces around 3.16 tons of carbon per year <strong>(3.16 TONS PER HOME)</strong>
+                        Some ways to lower your carbon footprint for power usage  would be to
+                        turn your heat down, turn off anything that uses power when not in use, replace
+                        lights with LED's which use up to 85% less power. To learn more about this and other
+                        ways to lower your carbon footprint please visit the link below.
+                    </p>
+                    <a href="https://www.nytimes.com/guides/year-of-living-better/how-to-reduce-your-carbon-footprint" class="btn btn-primary">NY Times</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(drawChart);
 
@@ -37,5 +97,5 @@
 
         chart.draw(data, options);
     }
-</script>
-<div id="piechart" style="width: 900px; height: 500px;"></div>
+    </script>
+    <div id="piechart" style="width: 900px; height: 500px; margin-top:-1000px; margin-left: 500px; position:static"></div>
