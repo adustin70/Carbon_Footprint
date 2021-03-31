@@ -179,10 +179,13 @@ namespace CarbonProject.Controllers
             return Ok();
         }
 
-        public JsonResult SerializeCarbonData(CarbonFootprint footprint)
+        public IActionResult UsersChart()
         {
-            string json = JsonConvert.SerializeObject(footprint);
-            return Json(json);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _context.Environmentalists.Where(e => e.IdentityUserId == userId).FirstOrDefault();
+            var data = _context.CarbonFootprints.Where(c => c.EnvironmentalistId == user.Id).FirstOrDefault();
+
+            return View(data);
         }
     }
 }

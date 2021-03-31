@@ -6,12 +6,13 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4"> Profile </h1>
+    <h1 class="display-4">@Model.Environmentalist.UserName's Profile </h1>
 </div>
 
 <div>
     <a asp-action="Edit">Edit Details</a> |
-    <a asp-action="EditSurvey">Update Survey Answers</a>
+    <a asp-action="EditSurvey">Update Survey Answers</a> |
+    <a asp-action="UsersChart">View Combined Chart</a>
 </div>
 
 <div class="container" style="margin-left:-300px; position:static; width:600px">
@@ -130,7 +131,7 @@
         var options = {
             title: 'Carbon Footprint',
             curveType: 'function',
-            lineWidth: 10,
+            lineWidth: 7,
             legend: { position: 'bottom' }
         };
 
