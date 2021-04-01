@@ -9,7 +9,7 @@
     <h1 class="display-4">@Model.Environmentalist.UserName's Profile </h1>
 </div>
 
-<div>
+<div style="margin-left:-300px">
     <a asp-action="Edit">Edit Details</a> |
     <a asp-action="EditSurvey">Update Survey Answers</a> |
     <a asp-action="UsersChart" asp-route-id="@Model.EnvironmentalistId">View Combined Chart</a>
@@ -91,7 +91,7 @@
         ]);
 
         var options = {
-            title: 'My Monthly Carbon Footprint',
+            title: 'My Monthly Carbon Footprint in grams',
             is3D: true
         };
 
@@ -129,7 +129,7 @@
         ]);
 
         var options = {
-            title: 'Carbon Footprint',
+            title: 'Carbon Footprint in grams',
             curveType: 'function',
             legend: { position: 'bottom' }
         };
