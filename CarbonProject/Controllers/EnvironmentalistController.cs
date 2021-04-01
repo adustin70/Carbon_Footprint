@@ -1,5 +1,6 @@
 ﻿using CarbonProject.Data;
 using CarbonProject.Models;
+using CarbonProject.viewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -179,13 +180,38 @@ namespace CarbonProject.Controllers
             return Ok();
         }
 
-        public IActionResult UsersChart()
+        public IActionResult UsersChart(int? id)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = _context.Environmentalists.Where(e => e.IdentityUserId == userId).FirstOrDefault();
-            var data = _context.CarbonFootprints.Where(c => c.EnvironmentalistId == user.Id).FirstOrDefault();
+            var user = _context.CarbonFootprints.Where(c => c.EnvironmentalistId == id).FirstOrDefault();
+            var data = _context.CarbonFootprints.FromSqlRaw("SELECT * FROM dbo.CarbonFootprints").ToList();
 
-            return View(data);
+
+            var fuel = 0.0;
+            var bags = 0.0;
+            var bottles = 0.0;
+            var power = 0.0;
+
+            foreach (var item in data)
+            {
+                fuel += item.FuelEmissions;
+                bags += item.PlasticBagsEmissions;
+                bottles += item.PlasticBottlesEmissions;
+                power += item.PowerUsedEmissions;
+            }
+
+
+            var CarbonViewModel = new CarbonFootprintViewModel
+            {
+                FuelEmissions = fuel,
+                PlasticBagsEmissions = bags,
+                PlasticBottlesEmissions = bottles,
+                PowerUsedEmissions = power,
+                SignedInFuelEmissions = user.FuelEmissions,
+                SignedInPlasticBagsEmissions = user.PlasticBagsEmissions,
+                SignedInPlasticBottlesEmissions = user.PlasticBottlesEmissions,
+                SignedInPowerUsedEmissions = user.PowerUsedEmissions
+            };
+            return View(CarbonViewModel);
         }
     }
 }

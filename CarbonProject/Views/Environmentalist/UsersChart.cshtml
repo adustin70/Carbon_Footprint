@@ -1,4 +1,4 @@
-﻿@model CarbonProject.Models.CarbonFootprint
+﻿@model CarbonProject.viewModels.CarbonFootprintViewModel
 
 @{
     ViewData["Title"] = "UsersChart";
@@ -7,43 +7,34 @@
 
 <h1>UsersChart</h1>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['bar'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Source', 'Your Footprint', 'Other Users'],
+            ['Fuel Emissions', @Model.SignedInFuelEmissions, @Model.FuelEmissions],
+            ['Plastic Bags', @Model.SignedInPlasticBagsEmissions, @Model.PlasticBagsEmissions],
+            ['Plastic Bottles', @Model.SignedInPlasticBottlesEmissions, @Model.PlasticBottlesEmissions],
+            ['Power Emissions', @Model.SignedInPowerUsedEmissions, @Model.PowerUsedEmissions]
+        ]);
+
+        var options = {
+            chart: {
+                title: 'Company Performance',
+                subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+            },
+            bars: 'horizontal'
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+</script>
+<div id="barchart_material" style="width: 900px; height: 500px;"></div>
 <div>
-    <h4>CarbonFootprint</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FuelEmissions)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FuelEmissions)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FuelType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FuelType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlasticBagsEmissions)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlasticBagsEmissions)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlasticBottlesEmissions)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlasticBottlesEmissions)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PowerUsedEmissions)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PowerUsedEmissions)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Profile</a>
 </div>

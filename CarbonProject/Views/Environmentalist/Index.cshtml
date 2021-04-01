@@ -12,7 +12,7 @@
 <div>
     <a asp-action="Edit">Edit Details</a> |
     <a asp-action="EditSurvey">Update Survey Answers</a> |
-    <a asp-action="UsersChart">View Combined Chart</a>
+    <a asp-action="UsersChart" asp-route-id="@Model.EnvironmentalistId">View Combined Chart</a>
 </div>
 
 <div class="container" style="margin-left:-300px; position:static; width:600px">
@@ -131,7 +131,6 @@
         var options = {
             title: 'Carbon Footprint',
             curveType: 'function',
-            lineWidth: 7,
             legend: { position: 'bottom' }
         };
 
