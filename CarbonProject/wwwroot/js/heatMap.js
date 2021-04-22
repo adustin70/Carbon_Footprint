@@ -17,12 +17,6 @@ new deck.DeckGL({
             dataTransform: d => d.features,
             elevationScale: 300,
             getColorValue: points => points.reduce((sum, point) => sum + point.properties.value, 0) / points.length,
-            onSetColorDomain: (ecol) => {
-                console.log('color domain set', ecol)
-                max_span.innerHTML = ecol[1]
-                color_domain = ecol;
-                create_legend()
-            },
             getElevationValue: points => points.reduce((sum, point) => sum + point.properties.value, 0) / points.length,
             getPosition: d => d.geometry.coordinates,
         }),
